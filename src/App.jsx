@@ -288,8 +288,7 @@ function App() {
   // "Start from" jumps directly to the Nth word (1-based). When shuffled, that
   // word may sit anywhere in the shuffled order, so we walk back to its position.
   const startFromValue = practiceCount ? practiceWordIdx + 1 : 0;
-  const handleStartFrom = (e) => {
-    const n = Number(e.target.value);
+  const handleStartFrom = (n) => {
     if (!n || n < 1) return;
     const targetWordIdx = Math.min(n, practiceCount) - 1;
     const posInOrder =

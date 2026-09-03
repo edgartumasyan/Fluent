@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { speakWord } from "../speak";
 
 const SpeakerIcon = () => (
@@ -92,6 +92,21 @@ function PracticeView({
   onToggleCurrentWrong,
 }) {
   const touchStartX = useRef(null);
+  // While the user is typing, the field holds their raw text instead of the
+  // derived card number, so partial input ("3" on the way to "345") and an
+  // empty field survive re-renders instead of snapping back to the current card.
+  const [startDraft, setStartDraft] = useState(null);
+
+  const handleStartChange = (e) => {
+    const raw = e.target.value.replace(/[^0-9]/g, "");
+    setStartDraft(raw);
+    const n = Number(raw);
+    if (raw !== "" && n >= 1) onChangeStartFrom(Math.min(n, total));
+  };
+  const handleStartBlur = () => setStartDraft(null);
+  const handleStartKeyDown = (e) => {
+    if (e.key === "Enter") e.currentTarget.blur();
+  };
 
   const onTouchStart = (e) => {
     touchStartX.current = e.changedTouches[0].clientX;
@@ -143,10 +158,14 @@ function PracticeView({
             id="practice-start-input"
             className="practice-start-input"
             type="number"
+            inputMode="numeric"
             min="1"
             max={total}
-            value={startFromValue}
-            onChange={onChangeStartFrom}
+            value={startDraft ?? startFromValue}
+            onChange={handleStartChange}
+            onFocus={(e) => e.target.select()}
+            onBlur={handleStartBlur}
+            onKeyDown={handleStartKeyDown}
           />
           <span className="practice-start-suffix">of {total}</span>
         </div>
