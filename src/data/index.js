@@ -22,18 +22,42 @@ function loadList(key) {
 const loadAdded = (source) => loadList(addedKey(source));
 const loadDeleted = (source) => loadList(deletedKey(source));
 
+// Under `npm run dev` the Vite words-api plugin owns the JSON files on disk, so
+// edits go straight to them and show up in `git status` ready to be committed
+// and deployed. The built app has no backend (GitHub Pages is static), so there
+// the bundled JSON is read-only and edits become a localStorage overlay that
+// never leaves the browser it was made in.
+const EDITS_JSON_ON_DISK = import.meta.env.DEV;
+
+const apiUrl = (source, params = "") =>
+  `/api/words?source=${encodeURIComponent(source)}${params}`;
+
 // Returns the bundled words plus any words the user added locally, minus any the
 // user has deleted (bundled deletions are tracked as a list of ids).
-export function getWords(source) {
+export async function getWords(source) {
+  if (EDITS_JSON_ON_DISK) {
+    const res = await fetch(apiUrl(source));
+    if (!res.ok) throw new Error(`Loading words failed: ${res.status}`);
+    return res.json();
+  }
   const base = SOURCES[source] || SOURCES.my;
   const deleted = new Set(loadDeleted(source));
   return [...base, ...loadAdded(source)].filter((w) => !deleted.has(w.id));
 }
 
-// Persists a new word in localStorage and returns the created record. The id is
-// derived from every known word (bundled + added) so it never collides with a
-// deleted bundled id.
-export function addWord(source, { english, russian, armenian }) {
+// Persists a new word and returns the created record. The id is derived from
+// every known word (bundled + added) so it never collides with a deleted
+// bundled id.
+export async function addWord(source, { english, russian, armenian }) {
+  if (EDITS_JSON_ON_DISK) {
+    const res = await fetch(apiUrl(source), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ english, russian, armenian }),
+    });
+    if (!res.ok) throw new Error(`Adding a word failed: ${res.status}`);
+    return res.json();
+  }
   const base = SOURCES[source] || SOURCES.my;
   const added = loadAdded(source);
   const maxId = [...base, ...added].reduce((m, w) => Math.max(m, w.id), 0);
@@ -49,7 +73,12 @@ export function addWord(source, { english, russian, armenian }) {
 
 // Removes a word. Locally-added words are dropped from the added list; bundled
 // words (which can't be edited on disk) are recorded in the deleted list.
-export function deleteWord(source, id) {
+export async function deleteWord(source, id) {
+  if (EDITS_JSON_ON_DISK) {
+    const res = await fetch(apiUrl(source, `&id=${id}`), { method: "DELETE" });
+    if (!res.ok) throw new Error(`Deleting a word failed: ${res.status}`);
+    return;
+  }
   const added = loadAdded(source);
   if (added.some((w) => w.id === id)) {
     localStorage.setItem(

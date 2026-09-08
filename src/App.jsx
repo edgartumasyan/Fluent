@@ -95,7 +95,10 @@ function App() {
   const [isExporting, setIsExporting] = useState(false);
 
   useEffect(() => {
-    setWords(getWords(profile));
+    let cancelled = false;
+    getWords(profile).then((next) => {
+      if (!cancelled) setWords(next);
+    });
     setVisibility({});
     setPracticeIdx(0);
     setPracticeFront(true);
@@ -105,6 +108,9 @@ function App() {
     setBrowseOrder(null);
     setWrongIds(getWrongIds(profile));
     setReviewOnly(false);
+    return () => {
+      cancelled = true;
+    };
   }, [profile]);
 
   const toggleTheme = useCallback(() => {
@@ -216,8 +222,8 @@ function App() {
   const verifyCode = async (code) => {
     if (!(await verifyAccessCode(code))) return false;
     if (gateAction === "delete") {
-      deleteWord(profile, pendingDeleteId);
-      setWords(getWords(profile));
+      await deleteWord(profile, pendingDeleteId);
+      setWords(await getWords(profile));
       closeGate();
       return true;
     }
@@ -225,9 +231,9 @@ function App() {
     return true;
   };
 
-  const handleAddWord = (fields) => {
-    addWord(profile, fields);
-    setWords(getWords(profile));
+  const handleAddWord = async (fields) => {
+    await addWord(profile, fields);
+    setWords(await getWords(profile));
     closeGate();
   };
 

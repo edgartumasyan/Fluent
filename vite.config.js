@@ -145,6 +145,10 @@ function generatePdf(words, res) {
   doc.end();
 }
 
+function writeWords(wordsFile, words) {
+  fs.writeFileSync(wordsFile, JSON.stringify(words, null, 2) + "\n");
+}
+
 function wordsApiPlugin() {
   return {
     name: "words-api",
@@ -177,18 +181,29 @@ function wordsApiPlugin() {
             const { english, russian, armenian } = JSON.parse(body);
 
             const words = JSON.parse(fs.readFileSync(wordsFile, "utf-8"));
+            // Derive from the max id, not the length: ids stay unique even once
+            // deletions have left gaps in the file.
             const newWord = {
-              id: words.length + 1,
+              id: words.reduce((m, w) => Math.max(m, w.id), 0) + 1,
               english: english.trim(),
               russian: russian.trim(),
               armenian: armenian.trim(),
             };
             words.push(newWord);
-            fs.writeFileSync(wordsFile, JSON.stringify(words, null, 2) + "\n");
+            writeWords(wordsFile, words);
 
             res.setHeader("Content-Type", "application/json");
             res.end(JSON.stringify(newWord));
           });
+          return;
+        }
+
+        if (req.method === "DELETE") {
+          const id = Number(new URL(req.url, "http://localhost").searchParams.get("id"));
+          const words = JSON.parse(fs.readFileSync(wordsFile, "utf-8"));
+          writeWords(wordsFile, words.filter((w) => w.id !== id));
+          res.statusCode = 204;
+          res.end();
           return;
         }
 
