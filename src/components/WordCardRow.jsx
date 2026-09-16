@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { speakWord } from "../speak";
+import { CAN_EDIT } from "../data";
 
 const SpeakerIcon = () => (
   <svg
@@ -104,13 +105,15 @@ const WordCardRow = memo(function WordCardRow({
         >
           <FlagIcon filled={isWrong} />
         </button>
-        <button
-          className="delete-btn"
-          onClick={() => onDelete(word.id)}
-          aria-label={`Delete ${word.english}`}
-        >
-          <TrashIcon />
-        </button>
+        {CAN_EDIT && (
+          <button
+            className="delete-btn"
+            onClick={() => onDelete(word.id)}
+            aria-label={`Delete ${word.english}`}
+          >
+            <TrashIcon />
+          </button>
+        )}
       </div>
     </div>
   );
