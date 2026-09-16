@@ -7,8 +7,6 @@ const SOURCES = {
   caroline: carolineWords,
 };
 
-const addedKey = (source) => `vocab-added-${source}`;
-const deletedKey = (source) => `vocab-deleted-${source}`;
 const wrongKey = (source) => `vocab-wrong-${source}`;
 
 function loadList(key) {
@@ -19,82 +17,54 @@ function loadList(key) {
   }
 }
 
-const loadAdded = (source) => loadList(addedKey(source));
-const loadDeleted = (source) => loadList(deletedKey(source));
+// Adding and deleting words is a `npm run dev` affair: the Vite words-api
+// plugin owns the JSON files on disk, so edits go straight to them and show up
+// in `git status` ready to be committed and deployed. The built app has no
+// backend to write to (GitHub Pages is static), so there the bundled JSON is
+// the whole word list, read-only, and the editing UI is hidden. Deployed edits
+// are deliberately impossible rather than kept in a per-browser overlay: an
+// overlay only ever existed in the one browser that made it, and never reached
+// the JSON the deploy is actually built from.
+export const CAN_EDIT = import.meta.env.DEV;
 
-// Under `npm run dev` the Vite words-api plugin owns the JSON files on disk, so
-// edits go straight to them and show up in `git status` ready to be committed
-// and deployed. The built app has no backend (GitHub Pages is static), so there
-// the bundled JSON is read-only and edits become a localStorage overlay that
-// never leaves the browser it was made in.
-const EDITS_JSON_ON_DISK = import.meta.env.DEV;
+const EDIT_ONLY_IN_DEV = "Words can only be edited when running the app locally";
 
 const apiUrl = (source, params = "") =>
   `/api/words?source=${encodeURIComponent(source)}${params}`;
 
-// Returns the bundled words plus any words the user added locally, minus any the
-// user has deleted (bundled deletions are tracked as a list of ids).
+// In dev, the live JSON file. In the built app, the bundled copy of it (sliced
+// so callers can't mutate the imported module).
 export async function getWords(source) {
-  if (EDITS_JSON_ON_DISK) {
+  if (CAN_EDIT) {
     const res = await fetch(apiUrl(source));
     if (!res.ok) throw new Error(`Loading words failed: ${res.status}`);
     return res.json();
   }
-  const base = SOURCES[source] || SOURCES.my;
-  const deleted = new Set(loadDeleted(source));
-  return [...base, ...loadAdded(source)].filter((w) => !deleted.has(w.id));
+  return [...(SOURCES[source] || SOURCES.my)];
 }
 
-// Persists a new word and returns the created record. The id is derived from
-// every known word (bundled + added) so it never collides with a deleted
-// bundled id.
+// Persists a new word to the JSON file and returns the created record.
 export async function addWord(source, { english, russian, armenian }) {
-  if (EDITS_JSON_ON_DISK) {
-    const res = await fetch(apiUrl(source), {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ english, russian, armenian }),
-    });
-    if (!res.ok) throw new Error(`Adding a word failed: ${res.status}`);
-    return res.json();
-  }
-  const base = SOURCES[source] || SOURCES.my;
-  const added = loadAdded(source);
-  const maxId = [...base, ...added].reduce((m, w) => Math.max(m, w.id), 0);
-  const newWord = {
-    id: maxId + 1,
-    english: english.trim(),
-    russian: russian.trim(),
-    armenian: armenian.trim(),
-  };
-  localStorage.setItem(addedKey(source), JSON.stringify([...added, newWord]));
-  return newWord;
+  if (!CAN_EDIT) throw new Error(EDIT_ONLY_IN_DEV);
+  const res = await fetch(apiUrl(source), {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ english, russian, armenian }),
+  });
+  if (!res.ok) throw new Error(`Adding a word failed: ${res.status}`);
+  return res.json();
 }
 
-// Removes a word. Locally-added words are dropped from the added list; bundled
-// words (which can't be edited on disk) are recorded in the deleted list.
+// Removes a word from the JSON file.
 export async function deleteWord(source, id) {
-  if (EDITS_JSON_ON_DISK) {
-    const res = await fetch(apiUrl(source, `&id=${id}`), { method: "DELETE" });
-    if (!res.ok) throw new Error(`Deleting a word failed: ${res.status}`);
-    return;
-  }
-  const added = loadAdded(source);
-  if (added.some((w) => w.id === id)) {
-    localStorage.setItem(
-      addedKey(source),
-      JSON.stringify(added.filter((w) => w.id !== id)),
-    );
-    return;
-  }
-  const deleted = loadDeleted(source);
-  if (!deleted.includes(id)) {
-    localStorage.setItem(deletedKey(source), JSON.stringify([...deleted, id]));
-  }
+  if (!CAN_EDIT) throw new Error(EDIT_ONLY_IN_DEV);
+  const res = await fetch(apiUrl(source, `&id=${id}`), { method: "DELETE" });
+  if (!res.ok) throw new Error(`Deleting a word failed: ${res.status}`);
 }
 
 // The set of word ids the user has flagged "wrong" for a source, persisted so a
-// review list survives reloads. Kept per-source, like added/deleted.
+// review list survives reloads. This one stays in localStorage everywhere: it's
+// per-browser practice state, not word data, so it has nothing to write to disk.
 export function getWrongIds(source) {
   return loadList(wrongKey(source));
 }

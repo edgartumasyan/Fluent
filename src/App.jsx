@@ -6,6 +6,7 @@ import MenuDrawer from "./components/MenuDrawer";
 import CodeGateSheet from "./components/CodeGateSheet";
 import AddWordSheet from "./components/AddWordSheet";
 import {
+  CAN_EDIT,
   getWords,
   addWord,
   deleteWord,
@@ -413,9 +414,11 @@ function App() {
           />
         )}
 
-        <button className="fab" onClick={openAdd} aria-label="Add word">
-          +
-        </button>
+        {CAN_EDIT && (
+          <button className="fab" onClick={openAdd} aria-label="Add word">
+            +
+          </button>
+        )}
 
         {menuOpen && (
           <MenuDrawer
