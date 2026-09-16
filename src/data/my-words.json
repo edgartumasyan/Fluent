@@ -11881,8 +11881,122 @@
   },
   {
     "id": 1981,
-    "english": "A",
-    "russian": "c",
-    "armenian": "A"
+    "english": "urgent",
+    "russian": "срочный",
+    "armenian": "շտապ, հրատապ"
+  },
+  {
+    "id": 1982,
+    "english": "string",
+    "russian": "верёвка, шнурок",
+    "armenian": "լար, պարան"
+  },
+  {
+    "id": 1983,
+    "english": "triumph",
+    "russian": "триумф, победа",
+    "armenian": "հաղթանակ, տրիումֆ"
+  },
+  {
+    "id": 1984,
+    "english": "underrated",
+    "russian": "недооценённый",
+    "armenian": "թերագնահատված"
+  },
+  {
+    "id": 1985,
+    "english": "passion",
+    "russian": "страсть",
+    "armenian": "կիրք"
+  },
+  {
+    "id": 1986,
+    "english": "worship",
+    "russian": "поклонение, боготворить",
+    "armenian": "երկրպագություն, պաշտամունք"
+  },
+  {
+    "id": 1987,
+    "english": "it turned out",
+    "russian": "оказалось",
+    "armenian": "պարզվեց"
+  },
+  {
+    "id": 1988,
+    "english": "cub",
+    "russian": "детёныш",
+    "armenian": "ձագ"
+  },
+  {
+    "id": 1989,
+    "english": "catchy",
+    "russian": "запоминающийся, броский",
+    "armenian": "հիշվող, գրավիչ"
+  },
+  {
+    "id": 1990,
+    "english": "rescue",
+    "russian": "спасать, спасение",
+    "armenian": "փրկել, փրկություն"
+  },
+  {
+    "id": 1991,
+    "english": "campfire",
+    "russian": "костёр",
+    "armenian": "խարույկ"
+  },
+  {
+    "id": 1992,
+    "english": "toss",
+    "russian": "бросать, кидать",
+    "armenian": "նետել, գցել"
+  },
+  {
+    "id": 1993,
+    "english": "drug",
+    "russian": "лекарство, наркотик",
+    "armenian": "դեղ, դեղամիջոց, թմրանյութ"
+  },
+  {
+    "id": 1994,
+    "english": "compatriot",
+    "russian": "соотечественник",
+    "armenian": "հայրենակից"
+  },
+  {
+    "id": 1995,
+    "english": "uneven",
+    "russian": "неровный",
+    "armenian": "անհարթ"
+  },
+  {
+    "id": 1996,
+    "english": "glide",
+    "russian": "скользить",
+    "armenian": "սահել"
+  },
+  {
+    "id": 1997,
+    "english": "prayer",
+    "russian": "молитва",
+    "armenian": "աղոթք"
+  },
+  {
+    "id": 1998,
+    "english": "submission",
+    "russian": "подчинение",
+    "armenian": "հնազանդություն"
+  },
+  {
+    "id": 1999,
+    "english": "decay",
+    "russian": "разложение",
+    "armenian": "քայքայում"
+  },
+  {
+    "id": 2000,
+    "english": "endurance",
+    "russian": "выносливость",
+    "armenian": "դիմացկունություն, տոկունություն"
   }
 ]
