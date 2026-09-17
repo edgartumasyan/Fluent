@@ -11998,5 +11998,125 @@
     "english": "endurance",
     "russian": "выносливость",
     "armenian": "դիմացկունություն, տոկունություն"
+  },
+  {
+    "id": 2001,
+    "english": "abbot",
+    "russian": "настоятель монастыря",
+    "armenian": "վանահայր"
+  },
+  {
+    "id": 2002,
+    "english": "tension",
+    "russian": "напряжение",
+    "armenian": "լարվածություն"
+  },
+  {
+    "id": 2003,
+    "english": "sweeping",
+    "russian": "масштабный, широкий, подметание",
+    "armenian": "համապարփակ, լայնածավալ, ավլում"
+  },
+  {
+    "id": 2004,
+    "english": "vegetation",
+    "russian": "растительность",
+    "armenian": "բուսականություն"
+  },
+  {
+    "id": 2005,
+    "english": "guilt",
+    "russian": "вина",
+    "armenian": "մեղք, մեղքի զգացում"
+  },
+  {
+    "id": 2006,
+    "english": "unfold",
+    "russian": "разворачивать, раскрываться",
+    "armenian": "բացել, բացվել"
+  },
+  {
+    "id": 2007,
+    "english": "fold",
+    "russian": "складывать",
+    "armenian": "ծալել"
+  },
+  {
+    "id": 2008,
+    "english": "blossom",
+    "russian": "цвести, расцвет",
+    "armenian": "ծաղկել, ծաղկում"
+  },
+  {
+    "id": 2009,
+    "english": "suspicion",
+    "russian": "подозрение",
+    "armenian": "կասկած"
+  },
+  {
+    "id": 2010,
+    "english": "raven",
+    "russian": "ворон",
+    "armenian": "ագռավ"
+  },
+  {
+    "id": 2011,
+    "english": "omen",
+    "russian": "предзнаменование",
+    "armenian": "նշան, նախանշան"
+  },
+  {
+    "id": 2012,
+    "english": "brow",
+    "russian": "бровь",
+    "armenian": "հոնք"
+  },
+  {
+    "id": 2013,
+    "english": "amid",
+    "russian": "среди",
+    "armenian": "մեջտեղում"
+  },
+  {
+    "id": 2014,
+    "english": "tablecloth",
+    "russian": "скатерть",
+    "armenian": "սեղանի սփռոց"
+  },
+  {
+    "id": 2015,
+    "english": "assess",
+    "russian": "оценивать",
+    "armenian": "գնահատել"
+  },
+  {
+    "id": 2016,
+    "english": "wardrobe",
+    "russian": "гардероб",
+    "armenian": "զգեստապահարան"
+  },
+  {
+    "id": 2017,
+    "english": "compliance",
+    "russian": "соблюдение",
+    "armenian": "համապատասխանություն"
+  },
+  {
+    "id": 2018,
+    "english": "consent",
+    "russian": "согласие",
+    "armenian": "համաձայնություն"
+  },
+  {
+    "id": 2019,
+    "english": "crushing",
+    "russian": "сокрушительный",
+    "armenian": "ջախջախիչ"
+  },
+  {
+    "id": 2020,
+    "english": "properly",
+    "russian": "правильно, должным образом",
+    "armenian": "պատշաճ կերպով, ճիշտ"
   }
 ]
