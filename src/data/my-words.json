@@ -12118,5 +12118,95 @@
     "english": "properly",
     "russian": "правильно, должным образом",
     "armenian": "պատշաճ կերպով, ճիշտ"
+  },
+  {
+    "id": 2021,
+    "english": "chimney",
+    "russian": "дымоход",
+    "armenian": "ծխնելույզ"
+  },
+  {
+    "id": 2022,
+    "english": "dedicating",
+    "russian": "посвящение",
+    "armenian": "նվիրում"
+  },
+  {
+    "id": 2023,
+    "english": "primeval",
+    "russian": "древнейший",
+    "armenian": "նախնադարյան"
+  },
+  {
+    "id": 2024,
+    "english": "prey",
+    "russian": "добыча",
+    "armenian": "որս"
+  },
+  {
+    "id": 2025,
+    "english": "digestion",
+    "russian": "пищеварение",
+    "armenian": "մարսողություն"
+  },
+  {
+    "id": 2026,
+    "english": "ponder",
+    "russian": "обдумывать, размышлять",
+    "armenian": "խորհել, մտածել"
+  },
+  {
+    "id": 2027,
+    "english": "disheartened",
+    "russian": "упавший духом, обескураженный",
+    "armenian": "հուսալքված, հուսահատված"
+  },
+  {
+    "id": 2028,
+    "english": "tiresome",
+    "russian": "утомительный",
+    "armenian": "հոգնեցուցիչ"
+  },
+  {
+    "id": 2029,
+    "english": "glance",
+    "russian": "взгляд",
+    "armenian": "հայացք"
+  },
+  {
+    "id": 2030,
+    "english": "intimately",
+    "russian": "близко, тесно, глубоко",
+    "armenian": "մտերմորեն"
+  },
+  {
+    "id": 2031,
+    "english": "necktie / tie",
+    "russian": "галстук",
+    "armenian": "փողկապ"
+  },
+  {
+    "id": 2032,
+    "english": "sensible",
+    "russian": "разумный",
+    "armenian": "ողջամիտ, խելամիտ"
+  },
+  {
+    "id": 2033,
+    "english": "arise",
+    "russian": "возникать",
+    "armenian": "ծագել, առաջանալ"
+  },
+  {
+    "id": 2034,
+    "english": "benefactor",
+    "russian": "благодетель",
+    "armenian": "բարերար"
+  },
+  {
+    "id": 2035,
+    "english": "charitable",
+    "russian": "благотворительный",
+    "armenian": "բարեգործական"
   }
 ]
