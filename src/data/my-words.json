@@ -12208,5 +12208,95 @@
     "english": "charitable",
     "russian": "благотворительный",
     "armenian": "բարեգործական"
+  },
+  {
+    "id": 2036,
+    "english": "compensate",
+    "russian": "компенсировать",
+    "armenian": "փոխհատուցել"
+  },
+  {
+    "id": 2037,
+    "english": "humble",
+    "russian": "скромный",
+    "armenian": "համեստ"
+  },
+  {
+    "id": 2038,
+    "english": "iron",
+    "russian": "утюг, железо",
+    "armenian": "արդուկ, երկաթ"
+  },
+  {
+    "id": 2039,
+    "english": "modest",
+    "russian": "скромный",
+    "armenian": "համեստ"
+  },
+  {
+    "id": 2040,
+    "english": "occupy",
+    "russian": "занимать, оккупировать",
+    "armenian": "զբաղեցնել, գրավել"
+  },
+  {
+    "id": 2041,
+    "english": "penny (small unit of money in the UK; in the US, a one-cent)",
+    "russian": "пенни",
+    "armenian": "պենի"
+  },
+  {
+    "id": 2042,
+    "english": "preach",
+    "russian": "проповедовать",
+    "armenian": "քարոզել"
+  },
+  {
+    "id": 2043,
+    "english": "promote",
+    "russian": "продвигать",
+    "armenian": "խթանել"
+  },
+  {
+    "id": 2044,
+    "english": "sustain",
+    "russian": "поддерживать",
+    "armenian": "պահել, պահպանել"
+  },
+  {
+    "id": 2045,
+    "english": "obligation",
+    "russian": "obligation",
+    "armenian": "պարտավորություն"
+  },
+  {
+    "id": 2046,
+    "english": "soak",
+    "russian": "замачивать",
+    "armenian": "թրջել"
+  },
+  {
+    "id": 2047,
+    "english": "awkward",
+    "russian": "неуклюжий, неудобный",
+    "armenian": "անհարմար"
+  },
+  {
+    "id": 2048,
+    "english": "caretaker",
+    "russian": "смотритель, сторож",
+    "armenian": "խնամակալ, պահակ"
+  },
+  {
+    "id": 2049,
+    "english": "discourage",
+    "russian": "отговаривать, обескураживать",
+    "armenian": "հուսահատեցնել, խոչընդոտել"
+  },
+  {
+    "id": 2050,
+    "english": "eyelash",
+    "russian": "ресница",
+    "armenian": "թարթիչ"
   }
 ]
